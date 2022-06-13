@@ -1,0 +1,9 @@
+
+
+<svg width="25" height="25" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <g class="layer">
+  <rect fill="white" height="22" id="svg_1" width="20" x="3" y="2"/>
+  <path d="m13.5,5l0,15" id="svg_2" stroke="#1D1F22" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m6,12.5l15,0" id="svg_3" stroke="#1D1F22" stroke-linecap="round" stroke-linejoin="round"/>
+ </g>
+</svg>

@@ -1,0 +1,110 @@
+/*selectors sorted by alphabet*/
+
+@import './scss/Bag';
+@import './scss/Cart';
+@import 'scss/Category';
+@import './scss/Header';
+@import './scss/Product';
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&family=Roboto+Condensed:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&family=Roboto+Condensed:wght@700&family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&family=Roboto+Condensed:wght@700&family=Roboto:wght@500&family=Source+Sans+Pro&display=swap');
+
+body {
+  max-width: 100vw;
+}
+
+button{
+  border-width: 0;
+  background-color: white;
+  margin-right:43px;
+}
+
+form {
+  border: 1px solid #d3d3d300;
+  border-radius: 0;
+}
+
+
+.hide-price {
+  display: none;
+}
+
+
+#list {
+  margin: 2em 2em 2em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#root {
+  overflow: no-display;
+  min-height: 100vh;
+  margin-top: 20px;
+  list-style-type: none;
+}
+
+#root > div {
+  display: flex;
+  flex-direction: column;
+  position:relative;
+}
+
+#root > div > div > ul > li:nth-child {
+  width: 15vh;
+}
+
+header > nav > div{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+ul li{
+  list-style-type: none;
+}
+
+
+@media screen and (min-width: 1920px) {
+
+  #shopping-cart{
+    top: 78px;
+    flex: 1 0 auto;
+    height: 677px;
+    display: flex;
+    outline: 0;
+    position: fixed;
+    overflow-y: auto;
+    flex-direction: column;
+    background-color: rgb(255 255 255);
+    z-index: 3;
+    width: 325px;
+    margin-left: 1443px;
+    padding: 32px 32px 16px 16px;
+  }
+
+}
+
+@media screen and (min-width: 1680px) {
+
+  #shopping-cart{
+    top: 78px;
+    flex: 1 0 auto;
+    height: 677px;
+    display: flex;
+    outline: 0;
+    position: fixed;
+    overflow-y: auto;
+    flex-direction: column;
+    background-color: rgb(255 255 255);
+    z-index: 3;
+    width: 325px;
+    margin-left: 1143px;
+    padding: 32px 32px 16px 16px;
+  }
+
+}
+

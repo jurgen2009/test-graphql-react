@@ -1,0 +1,460 @@
+//_Bag.scss
+
+.attributesItemBag, .attributesItemAdd1Bag, .attributesItemAdd2Bag, .attributesItemSwatchSelectedBag {
+  display: flex;
+  border: 1px solid #1D1F22;
+  box-sizing: border-box;
+  text-align: center;
+  top: 50%;
+  flex: 1 1 auto;
+  margin: 0 5px;
+  width: 63px;
+  height: 45px;
+  left: 71px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160%;
+  color: #1D1F22;
+  align-items: center;
+  justify-content: center;
+  z-index:-1;
+}
+
+.attributesItemSwatchSelectedBag {
+  height: 32px;
+  width: 32px;
+  display: inline-block;
+  z-index: -1;
+}
+
+.attributesItemBagText{
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+}
+
+
+
+
+.bagArrowLeftImage{
+  margin-left: 160px;
+  margin-top: 250px;
+  position:absolute;
+  height: 24px;
+  width: 24px;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.73);
+  cursor: pointer;
+}
+
+.bagArrowRightImage{
+  margin-left: 195px;
+  margin-top: 250px;
+  position:absolute;
+  height: 24px;
+  width: 24px;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.73);
+  cursor: pointer;
+}
+
+.bagArrowImageNone{
+  display: none;
+}
+
+.bagArrow{
+  cursor: pointer;
+  height: 11.2380752563px;
+  width: 5.625px;
+  margin-left: 8px;
+  margin-top: 6px;
+}
+
+.bagUnderline{
+  border-bottom: solid 1px #E5E5E5;
+  width: 1240px;
+  margin-top:55px;
+  margin-left: 100px;
+}
+
+#bagTax{
+  margin: 8px 0 8px;
+  height: 28px;
+  left: 0;
+  top: 0;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: #1D1F22;
+  width: auto;
+}
+
+
+
+#bagQuantity{
+  margin: 8px 0 8px;
+  height: 28px;
+  width: 184px;
+  left: 0;
+  top: 0;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: #1D1F22;
+}
+
+#bagTotal{
+  font-family: Raleway, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0;
+  text-align: right;
+}
+
+#bagTotalSum{
+margin: 8px 0 8px;
+  height: 28px;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: right;
+  color: #1D1F22;
+}
+
+#bagTotals{
+  display: flex;
+  margin: 1em;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 1240px;
+  margin-left: 140px;
+  align-items: flex-start;
+}
+
+#bagOrderButton{
+  height: 43px;
+  width: 279px;
+  left: 0;
+  top: 116px;
+  border-radius: 0;
+  padding: 16px 32px 16px 32px;
+  background: #5ECE7B;
+  margin-top: 20px;
+  font-family: 'Raleway', sans-serif;;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+
+}
+
+#bagOrderButtonText{
+  height: 17px;
+  width: 48px;
+  left: 115.5px;
+  top: 13px;
+}
+
+#bag-total-name{
+  margin-right: 25px;
+}
+
+.contentImgBag{
+  width: 200px;
+  top: 280px;
+  border-radius: 0;
+  object-fit: contain;
+  height: fit-content;
+  margin-left: 24px;
+}
+
+.countContentImgBag {
+  align-self: stretch;
+  font-family: Raleway, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 38px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.countContentImgBag{
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 160%;
+  align-items: center;
+  text-align: center;
+}
+
+.captionBag1, .captionBag2, .captionBag3, .captionBag4 {
+  font-family: "Roboto Condensed", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #1D1F22;
+  position: absolute;
+  margin-left: 5px;
+  width: 250px;
+  z-index:-1;
+}
+
+.captionBag1{
+  margin-top: -95px;
+}
+
+.captionBag2{
+  margin-top: -120px;
+}
+
+.captionBag3{
+  margin-top: -50px;
+}
+
+.captionBag4{
+  margin-top: -50px;
+}
+
+
+.groupContentBag{
+  display: flex;
+}
+
+#cartBag-title{
+  font-family: Raleway, serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: 0;
+  text-align: left;
+  height: 40px;
+  width: 84px;
+  margin-left: 100px;
+}
+
+#cart-bag{
+  height: auto;
+  width: 1440px;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+  margin-top:80px;
+}
+
+
+.galleryAttributesAdd1BagCaption {
+  position:absolute;
+  margin-bottom: 55px;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  text-align: right;
+  color: #1D1F22;
+}
+
+.galleryAttributesAdd2BagCaption {
+  position:absolute;
+  margin-bottom: 55px;
+}
+
+.groupContentImgBag1{
+  display: flex;
+  margin-left: 101px;
+  position: relative;
+}
+
+.groupContentImgBag2{
+  display: flex;
+  margin-left: 700px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.galleryAttributesBag{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: 15px -5px 0;
+  z-index: -1;
+}
+
+.galleryAttributesBag, .galleryAttributesAdd1Bag, .galleryAttributesAdd2Bag, .galleryAttributesSwatchBag {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: 45px -5px 0;
+  margin-bottom: 45px;
+
+}
+
+.minusContentImgBag {
+  cursor: pointer;
+  border: 1px solid #1D1F22;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0 5px;
+  padding: 6px !important;
+  align-self: stretch;
+  height: 45px;
+  width: 45px;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+}
+
+.plus_minusContentImgBag {
+  height: 288px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.plusContentImgBag {
+  cursor: pointer;
+  border: 1px solid #1D1F22;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0 5px;
+  padding: 8px !important;
+  align-self: stretch;
+  height: 45px;
+  width: 45px;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+}
+
+.shoppingCartItemListNameBagText {
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  color: #1D1F22;
+  margin: 20px 0;
+  width: 299px;
+  z-index: -1;
+}
+
+.shoppingCartItemListPriceBagText{
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #1D1F22;
+  z-index: -1;
+}
+
+.totalsBagFont{
+  font-weight: 700;
+}
+
+
+
+
+#viewBag{
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  flex-direction: column;
+  padding: 16px 32px;
+  left: 929px;
+  top: 478px;
+  color: black;
+  cursor: pointer;
+  width: 140px;
+  height: 43px;
+  background: #FFFFFF;
+  border: 1px solid #1D1F22;
+  margin-left: -12px;
+  margin-right: 12px;
+  text-decoration: none;
+  text-decoration-line: none;
+
+}
+
+#viewBag:hover {
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  flex-direction: column;
+  padding: 16px 32px;
+  left: 929px;
+  top: 478px;
+  cursor: pointer;
+  width: 140px;
+  height: 43px;
+  background-color: #5ECE7B;
+  color: white;
+  border: white;
+  margin-left: -12px;
+  margin-right: 12px;
+  text-decoration: none;
+  text-decoration-line: none;
+
+}
+
+.viewBagText{
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: inherit;
+  width: 100px;
+  margin: -5px 0px 0px 0px;
+}
+
+#empty{
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: inherit;
+  width: 1000px;
+  margin: 45vh 45vh;
+}

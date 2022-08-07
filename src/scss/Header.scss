@@ -1,7 +1,8 @@
 //_Header.scss
 
+
 .backOutButton{
-  margin-left:0;
+  margin-left:-7%;
 }
 
 #backout-button{
@@ -34,14 +35,14 @@
 }
 
 header {
-  width: 100%;
+  width: 94%;
   height: 78px;
   display: flex;
   position: fixed;
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  margin-top: -20px;
+  margin-top: -30px;
 }
 
 header > nav > div{
@@ -124,6 +125,7 @@ header > nav > div{
 }
 .selectCurrency{
   border-color: white;}
+
 
 
 

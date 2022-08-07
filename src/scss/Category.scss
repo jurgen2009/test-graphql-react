@@ -8,6 +8,14 @@
   height: 1613px;
 }
 
+.contentFixed{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  height: 1613px;
+  position:fixed;
+}
+
 .contentCategoryName{
   font-family: 'Raleway', sans-serif;
   font-style: normal;
@@ -17,22 +25,22 @@
   display: flex;
   align-items: center;
   color: #1D1F22;
-  margin-left: 115px;
+  margin-left: 6.5%;
   margin-top: 100px;
-
 }
 
 .contentUnorderedCards{
   list-style-type: none;
   display: flex;
-  align-items: flex-end;
   flex-wrap: wrap;
-  padding-left: 85px;
-  margin: 0 50px 191px 50px;
+  margin: 5% 0 0 4%;
+
 }
 
-.contentListCards{
-  margin: 21px 20px 21px 21px;
+.contentListCards {
+  margin: 2% 3% 5% 0;
+  flex: 28% 1 1;
+max-width: 28%;
 }
 
 .contentCard{
@@ -42,9 +50,10 @@
   align-items: center;
   width: 356px;
   height: 444px;
-  flex: none;
+  flex: 1% 1 1;
   order: 0;
-  flex-grow: 0;
+  position: relative;
+  padding: 16px 16px 16px 16px;
 }
 
 .contentCard:hover {
@@ -59,9 +68,44 @@
   flex: none;
   order: 0;
   flex-grow: 0;
+
+}
+
+.contentCard:hover .cardHoverSvg {
+display: inline;
+
+}
+
+.contentCard:hover .OutOfStock {
+  display: inline;
+
 }
 
 
+.cardHoverSvg{
+  display:none;
+  position: absolute;
+  margin: 0 0 50px 250px;
+  cursor: pointer;
+
+}
+
+
+.OutOfStock{
+  display:none;
+  position: absolute;
+  width: 356px;
+  height: 444px;
+  opacity: 0.5;
+  background: #FFFFFF;
+  cursor:pointer;
+
+}
+
+.OutOfStock > img{
+  margin:190px 0 0 100px;
+
+}
 
 .contentImg{
   width:356px;
@@ -69,6 +113,8 @@
   object-fit: contain;
   cursor: pointer;
 }
+
+
 
 .contentTextName{
   width: 354px;

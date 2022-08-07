@@ -1,14 +1,18 @@
 import React from 'react';
 import '../App.js'
 import {GET_CURRENCY} from "../query/СategoryQuery";
+import ArrowUp from "../svg/ArrowUp.svg";
+import ArrowDown from "../svg/ArrowDown.svg";
 
 class Currency extends React.Component {
     constructor(props) {
         super(props);
-        this.handlerCurrency = this.handlerCurrency.bind(this)
         this.state = {
-
             data: null,
+            currentCurrency: 0,
+            labels: this.props.labels || [],
+            showLabels: false,
+            selectedLabels: this.props.labels && this.props.labels[0],
             loading: true,
             } }
 
@@ -26,7 +30,23 @@ class Currency extends React.Component {
         })
     }
 
-    handlerCurrency = (event) => { this.props.updateCurrency(this.state.currentCurrency=event.target.value)}
+    dropDown = () => {
+        this.setState(prevState => ({
+            showLabels: !prevState.showLabels
+        }));
+    };
+
+    selectItem = async (item, index) =>  {
+        console.log(index)
+         this.setState({
+            selectedLabels: item,
+            showLabels: false,
+            currentCurrency: index
+        });
+
+      await this.props.updateCurrency(index)
+    };
+
 
     render() {
         const {loading, data} = this.state
@@ -34,19 +54,36 @@ class Currency extends React.Component {
         if (loading) return "Loading...";
 
         return (
+            <div className="select-box--box">
+                <div className="select-box--container">
+                    <div className="select-box--selected-item">
+                        {this.state.selectedLabels.symbol}
+                    </div>
+                    <div className="select-box--arrow" onClick={this.dropDown}>
+            <img src={`${
+                this.state.showLabels
+                    ? ArrowUp
+                    : ArrowDown
+            }`} alt=""/>
 
-            <div className="currencyChange">
-                <form onChange={this.handlerCurrency}>
-                    <label>
-                        <select value={this.value} onChange={this.handlerCurrency}>
-                            <option value={localStorage.getItem('currentCurrency')}>{data.currencies[this.props.currentCurrency].symbol}</option>
-                            {data.currencies.map((item, index) => (
-                                <option key={index} value={index}>{item.symbol}{" "}{item.label}</option>
-                            ))}
-                            ))}
-                        </select>
-                    </label>
-                </form>
+                    </div>
+
+                    <div
+                        style={{ display: this.state.showLabels ? "block" : "none" }}
+                        className={"select-box--items"}
+                    >
+                        {data.currencies.map((item, index) => (
+                            <div
+                                key={item.id}
+
+                                onClick={() =>  this.selectItem(item, index)}
+                                className={this.state.selectedLabels === item ? "selected" : ""}
+                            >
+                                {item.symbol}{' '}{item.label}
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         );
     }

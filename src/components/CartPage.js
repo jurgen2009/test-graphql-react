@@ -6,27 +6,26 @@ class CartPage extends React.Component {
     constructor(props) {
         super(props);
         this.showOverlay = this.showOverlay.bind(this);
+
         this.state = {
             data: null,
             loading: true,
             productID: null,
             quantityInCart: 1,
             itemsInCart:[],
-            overlay: 'auto'
         }
     }
 
-
-    showOverlay() {
-       if (this.state.overlay !== 'hidden')
-            {this.setState({ overlay: 'hidden' }); document.getElementById('overlay').style.display = 'flex'
-        document.querySelector('#root > div').style.overflow = 'hidden'
-                document.querySelector('#root > div').style.position = 'fixed'
+    showOverlay() {if(this.props.showLabels === false)
+       if (this.props.overlay === 'overlayClosed')
+            {   this.props.homeContainerChange('homeContainerOpened')
+                this.props.overlayChange('overlayOpened')
+                this.props.contentChange('contentFixed')
             } else
-            {this.setState({ overlay: 'auto' });
-                document.getElementById('overlay').style.display = 'none';
-        document.querySelector('body').style.overflow = 'auto';
-                document.querySelector('#root > div').style.position = 'relative'
+            {
+                this.props.homeContainerChange('homeContainerClosed')
+                this.props.overlayChange('overlayClosed')
+                this.props.contentChange('content')
             }
     }
 
@@ -37,9 +36,11 @@ class CartPage extends React.Component {
 
     render() {return this.props.itemsInCart.length===0 ?
         (<div id="cart">
-                   <div onClick={this.showOverlay}><img src={svgCart} alt={"logo"}/></div>
+                   <div onClick={() =>
+                   {this.showOverlay()}}><img src={svgCart} alt={"logo"}/></div>
             </div>) :  (<div id="cart">
-            <div onClick={this.showOverlay}>
+            <div onClick={() =>
+            {this.showOverlay()}}>
                     <svg width="31" height="29" xmlns="http://www.w3.org/2000/svg" fill="none">
                         <rect
                             id="svg_1" fill="black" y="0" x="11" rx="10" height="20" width="20"/>

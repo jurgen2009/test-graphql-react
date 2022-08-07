@@ -1,4 +1,5 @@
 import React from 'react';
+import parse from 'html-react-parser';
 import {GET_PRODUCT} from '../query/СategoryQuery.js'
 
 class ProductPage extends React.Component{
@@ -16,9 +17,7 @@ class ProductPage extends React.Component{
             attributesItemIdAdd2: null,
             itemsInCart:[],
         }
-
     }
-
 
     componentDidMount() {
 
@@ -30,8 +29,17 @@ class ProductPage extends React.Component{
             body: JSON.stringify({query:GET_PRODUCT, variables: {id: this.props.productID }})
         }).then(res => res.json()).then((response) => {
             this.setState({ data: response.data, loading: false })
-        })}
+             new Promise((resolve, reject) => {
+                if (response.data.product.attributes[0].items[0].id !== undefined)  {this.setState({   attributesItemId: response.data.product.attributes[0].items[0].id})}
+                if (response.data.product.attributes[1].items[0].id !== undefined)  {this.setState({   attributesItemIdSwatch: response.data.product.attributes[1].items[0].id})}
+                if (response.data.product.attributes[1].items[0].id !== undefined)  {this.setState({   attributesItemIdAdd1: response.data.product.attributes[1].items[0].id})}
+                if (response.data.product.attributes[2].items[0].id !== undefined)  {this.setState({   attributesItemIdAdd2: response.data.product.attributes[1].items[0].id})}
+            }).catch(function(error) {
+            }).then();
+       })
+        window.scrollTo(0, 0)
 
+    }
     componentDidUpdate(previousProps, previousState) {
         if (previousProps.data !== this.props.data) {
             fetch('http://localhost:4000', {
@@ -46,20 +54,25 @@ class ProductPage extends React.Component{
         }
     }
 
-
-    handlerGallery = (index)=> {this.props.updateGallery(this.state.galleryIndex=index)}
+    handlerGallery = (index)=> {
+        this.setState({ galleryIndex: index })
+        this.props.updateGallery(index)}
 
     handlerAttributesItem = (id)=> {if (this.props.attributesItemId!==id)
-    {this.props.updateAttributesItemId(this.state.attributesItemId=id)}}
+    {this.setState({ attributesItemId: id })
+        this.props.updateAttributesItemId(id)}}
 
     handlerAttributesItemSwatch = (id)=> {if (this.props.attributesItemIdSwatch!==id)
-    {this.props.updateAttributesItemIdSwatch(this.state.attributesItemIdSwatch=id)}}
+    {this.setState({ attributesItemIdSwatch: id })
+        this.props.updateAttributesItemIdSwatch(id)}}
 
     handlerAttributesItemAdd1 = (id)=> {if (this.props.attributesItemIdAdd1!==id)
-    {this.props.updateAttributesItemIdAdd1(this.state.attributesItemIdAdd1=id)}}
+    {this.setState({ attributesItemIdAdd1: id })
+        this.props.updateAttributesItemIdAdd1(id)}}
 
     handlerAttributesItemAdd2 = (id)=> {if (this.props.attributesItemIdAdd2!==id)
-    {this.props.updateAttributesItemIdAdd2(this.state.attributesItemIdAdd2=id)}}
+    {this.setState({ attributesItemIdAdd2: id })
+        this.props.updateAttributesItemIdAdd2(id)}}
 
     addProductArr = () => {
         this.props.addToCart(
@@ -67,6 +80,7 @@ class ProductPage extends React.Component{
                 indexId: this.props.itemsInCart.length,
                 id: this.state.data.product.id,
                 name: this.state.data.product.name,
+                brand: this.state.data.product.brand,
                 gallery: this.state.data.product.gallery,
                 prices: this.state.data.product.prices,
                 attributesFull: this.state.data.product.attributes,
@@ -77,43 +91,17 @@ class ProductPage extends React.Component{
                 attributesAdd1: this.state.attributesItemIdAdd1,
                 attributesAdd2: this.state.attributesItemIdAdd2,
                 image: this.state.data.product.gallery[this.state.galleryIndex],
+                priceForOne: this.state.data.product.prices[parseInt(this.props.currentCurrency)].amount,
                 quantity: 1,
                 imageIndex: 0,
             } : null)
 
     }
 
-    checkAttributesItemId=()=>{
-       if (this.state.data.product.attributes.map(res => res.items.some(res1 => res1.id.includes(this.state.attributesItemId))).some(res2=>res2===true)
-       )
-       { return this.addProductArr()} else {alert('attributes should be selected!' )}
-    }
-
-    checkAttributesItemIdSwatch=()=>{
-        if (this.state.data.product.attributes.map(res => res.items.some(res1 => res1.id.includes(this.state.attributesItemIdSwatch))).some(res2=>res2===true)
-           && this.state.data.product.attributes.map(res => res.items.some(res1 => res1.id.includes(this.state.attributesItemId))).some(res2=>res2===true)
-        )
-        { return this.addProductArr()} else {alert('attributes should be selected!' )}
-    }
-
-    checkAttributesItemIdAdd=()=>{
-          if (this.state.data.product.attributes.map(res => res.items.some(res1 => res1.id.includes(this.state.attributesItemIdAdd1))).some(res2=>res2===true)
-              &&
-              this.state.data.product.attributes.map(res => res.items.some(res1 => res1.id.includes(this.state.attributesItemIdAdd2))).some(res2=>res2===true)
-              &&
-              this.state.data.product.attributes.map(res => res.items.some(res1 => res1.id.includes(this.state.attributesItemId))).some(res2=>res2===true)
-          )
-        { return this.addProductArr()} else {alert('attributes should be selected!' )}
-
-    }
-
-
     render() {
 
         const {loading, data} = this.state
-
         if (loading) return "Loading...";
-
 
         if (this.props.productID!==null) {
             return (
@@ -134,36 +122,32 @@ class ProductPage extends React.Component{
                                 <br/>
                                 <span className="attributesItemType">{data.product.attributes.map((item1)=>{
                                     if (item1.type !== 'swatch' && item1.id !== 'With USB 3 ports' && item1.id !== 'Touch ID in keyboard')
-                                    {return item1.id+":"}})}</span>
+                                    {return item1.id+":"} else {return null}})}</span>
                                 <div className="galleryAttributes">
                                     {data.product.attributes.map((item1)=>item1.type==='text' && item1.id !=='With USB 3 ports' && item1.id !=='Touch ID in keyboard' ?
                                         item1.items.map(item2=>{
-                                        return this.state.attributesItemId!==null ? (<div className="attributesItem" key={item2.id}
-                                                                                          style={this.state.attributesItemId===item2.id ?
-                                                                                              {backgroundColor: 'black',
-                                                                                                  color: 'white'}: {}}
-                                                                                          onClick={() =>
-                                                                                          {this.handlerAttributesItem(item2.id)}}>
-                                                <span className="attributesItemText">{item2.value}</span>
-                                        </div>) :
-                                            (<div className="attributesItem" key={item2.id}  onClick={() =>
-                                            {this.handlerAttributesItem(item2.id)}}>
-                                                <span className="attributesItemText">{item2.value}</span>
-                                            </div>)
+                                            return this.state.attributesItemId!==null ? (<div className={this.state.attributesItemId===item2.id ? "attributesItemClicked":"attributesItem" } key={item2.id}
+                                                                                              onClick={() =>
+                                                                                              {this.handlerAttributesItem(item2.id)}}>
+                                                    <span className="attributesItemText">{item2.value}</span>
+                                                </div>) :
+                                                (<div className="attributesItem" key={item2.id}  onClick={() =>
+                                                {this.handlerAttributesItem(item2.id)}}>
+                                                    <span className="attributesItemText">{item2.value}</span>
+                                                </div>)
                                         }) : null) }
                                     <br/>
                                 </div>
                                 <span className="attributesItemSwatchType">
                                 {data.product.attributes.map((item1, index)=> {if (item1.type === 'swatch'|| item1.id==='With USB 3 ports')
-                                {return item1.id+":"}})}</span>
+                                {return item1.id+":"} else {return null}})}</span>
                                 <div className="galleryAttributesSwatch">
 
                                     {data.product.attributes.map((item1)=>(item1.type==='swatch') ? item1.items.map(item2=>{
 
                                             return this.state.attributesItemIdSwatch!==null ? (<div className="attributesItemSwatchSelected" key={item2.id}
                                                                                                     style={this.state.attributesItemIdSwatch === item2.id ?
-                                                                                                        {
-                                                                                                            backgroundColor: item2.id,
+                                                                                                        {   backgroundColor: item2.id,
                                                                                                             outlineStyle: 'solid',
                                                                                                             outlineColor: 'lawngreen',
                                                                                                             outlineOffset: '2px',
@@ -178,27 +162,21 @@ class ProductPage extends React.Component{
                                 </div>
                                 <div className="galleryAttributesAdd1">
                                     {data.product.attributes.map((item1)=>(item1.id.includes("USB"))  ? item1.items.map(item2=>{
-                                            return this.state.attributesItemIdAdd1 !==null ?
-                                                (<div className="attributesItemAdd1" key={item2.id}
-                                                                                              style={this.state.attributesItemIdAdd1===item2.id ?
-                                                                                                  {backgroundColor: 'black',
-                                                                                                      color: 'white'}: {}}
-                                                      onClick={() => {this.handlerAttributesItemAdd1(item2.id)}}>
-                                                    <span className="attributesItemText">{item2.id}</span>
-                                                </div>) : (<div className="attributesItemAdd1" key={item2.id}  onClick={() =>
-                                                {this.handlerAttributesItemAdd1(item2.id)}}><span className="attributesItemText">{item2.id}</span></div>)}) : null) }
+                                        return this.state.attributesItemIdAdd1 !==null ?
+                                            (<div className={this.state.attributesItemIdAdd1===item2.id ? "attributesItemAdd1Clicked":"attributesItemAdd1"} key={item2.id}
+                                                  onClick={() => {this.handlerAttributesItemAdd1(item2.id)}}>
+                                                <div className="attributesItemText">{item2.id}</div>
+                                            </div>) : (<div className="attributesItemAdd1" key={item2.id}  onClick={() =>
+                                            {this.handlerAttributesItemAdd1(item2.id)}}><span className="attributesItemText">{item2.id}</span></div>)}) : null) }
                                     <br/>
                                 </div>
 
                                 <div className="galleryAttributesAdd2">
                                     <div className="galleryAttributesAdd2Caption"><span className="attributesItemType">
-                                        {data.product.attributes.map((item1, index)=>{if (index === 2) {return item1.id+":"}})}</span></div>
+                                        {data.product.attributes.map((item1, index)=>{if (index === 2) {return item1.id+":"} else {return null}})}</span></div>
                                     {data.product.attributes.map((item1)=>(item1.id.includes("USB"))  ? item1.items.map(item2=>{
                                         return this.state.attributesItemIdAdd2 !==null ?
-                                            (<div className="attributesItemAdd2" key={item2.id}
-                                                  style={this.state.attributesItemIdAdd2===item2.id ?
-                                                      {backgroundColor: 'black',
-                                                          color: 'white'}: {}}
+                                            (<div className={this.state.attributesItemIdAdd2===item2.id ? "attributesItemAdd2Clicked":"attributesItemAdd2"} key={item2.id}
                                                   onClick={() => {this.handlerAttributesItemAdd2(item2.id)}}>
                                                 <span className="attributesItemText">{item2.id}</span>
                                             </div>) : (<div className="attributesItemAdd2" key={item2.id}  onClick={() =>
@@ -206,20 +184,17 @@ class ProductPage extends React.Component{
                                     <br/>
                                 </div>
 
-                                    <div className="galleryAddInfoPrice">
-                                        {"PRICE: "}<br/><br/>{data.product.prices[parseInt(this.props.currentCurrency)].currency.symbol}{" "}{data.product.prices[parseInt(this.props.currentCurrency)].amount}
-                                    </div>
-                                 <div className="galleryRight">
-
+                                <div className="galleryAddInfoPrice">
+                                    {"PRICE: "} </div>
+                                <div className="galleryAddInfoPriceNumbers">{data.product.prices[parseInt(this.props.currentCurrency)].currency.symbol}{" "}{data.product.prices[parseInt(this.props.currentCurrency)].amount}
+                                </div>
+                                <div className="galleryRight">
 
                                     {<button id="galleryAddInfoButton" onClick={() =>{
-                                        if ( data.product.attributes.length === 0) {return this.addProductArr()} else if
-                                        (data.product.attributes.length === 1) { return this.checkAttributesItemId()} else if
-                                        (data.product.attributes.length === 2)  {return this.checkAttributesItemIdSwatch()} else if
-                                        (data.product.attributes.length === 3)  {return this.checkAttributesItemIdAdd()}
+                                        if (data.product.inStock === true) {return this.addProductArr()}
                                     }}>ADD TO CART
                                     </button>}
-                                    <div className="galleryAddInfoDescription" dangerouslySetInnerHTML={{ __html: data.product.description }} />
+                                    <div className="galleryAddInfoDescription">{parse(data.product.description)}</div>
                                 </div>
                             </div>
                         </div>
@@ -231,6 +206,7 @@ class ProductPage extends React.Component{
 
 
 export default ProductPage
+
 
 
 

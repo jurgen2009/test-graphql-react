@@ -1,0 +1,92 @@
+//_Currency.scss
+
+
+.select-box--container {
+  height: 30px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+.select-box--box {
+  width: 114px;
+  position: absolute;
+  right: 3%;
+  top: 30px;
+}
+
+.select-box--selected-item {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  padding: 0px 12px;
+  margin: -4px 0 0 0;
+  vertical-align: middle;
+  font-family: "Raleway", sans-serif;;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  color: #1D1F22;
+}
+
+
+
+.select-box--items div {
+  padding: 6px;
+  padding-left: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  color: #1D1F22;
+  text-align: left;
+}
+
+.select-box--items div:hover {
+  background: #EEEEEE;
+}
+
+.select-box--items{
+margin: 0 0 0 40%;
+  width:110%;
+}
+
+.select-box--arrow {
+  width: 30px;
+  height: 30px;
+  margin: 0 10% 0 0;
+  padding: 0;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.select-box--arrow-down {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid red;
+}
+
+.select-box--arrow-up {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 10px solid red;
+}
+
+#root > div > header > div.checkOut > div{
+  z-index:2;
+}

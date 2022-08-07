@@ -4,13 +4,10 @@
   display: flex;
   border: 1px solid #1D1F22;
   box-sizing: border-box;
-  text-align: center;
-  top: 50%;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   margin: 0 5px;
   width: 63px;
   height: 45px;
-  left: 71px;
   font-family: "Source Sans Pro", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -20,6 +17,26 @@
   align-items: center;
   justify-content: center;
   z-index:-1;
+}
+
+.attributesItemBagBlack, .attributesItemAdd1BagBlack, .attributesItemAdd2BagBlack {
+  display: flex;
+  border: 1px solid #1D1F22;
+  box-sizing: border-box;
+  flex: 0 1 auto;
+  margin: 0 5px;
+  width: 63px;
+  height: 45px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160%;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+  background-color: black;
+  color: white;
 }
 
 .attributesItemSwatchSelectedBag {
@@ -37,9 +54,6 @@
   line-height: 18px;
   letter-spacing: 0.05em;
 }
-
-
-
 
 .bagArrowLeftImage{
   margin-left: 160px;
@@ -81,8 +95,8 @@
 
 .bagUnderline{
   border-bottom: solid 1px #E5E5E5;
-  width: 1240px;
-  margin-top:55px;
+  width: 1300px;
+  margin-top: 24px;
   margin-left: 100px;
 }
 
@@ -97,7 +111,9 @@
   font-size: 24px;
   line-height: 28px;
   color: #1D1F22;
-  width: auto;
+  display:flex;
+  width:17%;
+  justify-content: space-between;
 }
 
 
@@ -114,6 +130,9 @@
   font-size: 24px;
   line-height: 28px;
   color: #1D1F22;
+  text-align:start;
+  display:flex;
+  justify-content: space-between;
 }
 
 #bagTotal{
@@ -135,6 +154,9 @@ margin: 8px 0 8px;
   line-height: 28px;
   text-align: right;
   color: #1D1F22;
+  display:flex;
+  width:17%;
+  justify-content: space-between;
 }
 
 #bagTotals{
@@ -143,7 +165,7 @@ margin: 8px 0 8px;
   flex-direction: column;
   justify-content: space-between;
   width: 1240px;
-  margin-left: 140px;
+  margin-left: 8%;
   align-items: flex-start;
 }
 
@@ -161,7 +183,7 @@ margin: 8px 0 8px;
   font-weight: 600;
   font-size: 14px;
   line-height: 120%;
-
+  cursor: pointer;
 }
 
 #bagOrderButtonText{
@@ -210,32 +232,11 @@ margin: 8px 0 8px;
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
-  display: flex;
-  align-items: center;
-  text-align: center;
   color: #1D1F22;
-  position: absolute;
-  margin-left: 5px;
-  width: 250px;
+  margin: 20px 0 7px 5px;
+  width: 100%;
   z-index:-1;
 }
-
-.captionBag1{
-  margin-top: -95px;
-}
-
-.captionBag2{
-  margin-top: -120px;
-}
-
-.captionBag3{
-  margin-top: -50px;
-}
-
-.captionBag4{
-  margin-top: -50px;
-}
-
 
 .groupContentBag{
   display: flex;
@@ -263,35 +264,30 @@ margin: 8px 0 8px;
 }
 
 
-.galleryAttributesAdd1BagCaption {
-  position:absolute;
-  margin-bottom: 55px;
-  font-family: 'Raleway', sans-serif;
+.galleryAttributesAdd1BagCaption, .galleryAttributesAdd2BagCaption {
+  font-family: "Roboto Condensed", sans-serif;
   font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 160%;
-  text-align: right;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
   color: #1D1F22;
+  margin: 20px 0 7px 5px;
+  width: 100%;
+  z-index:-1;
 }
 
-.galleryAttributesAdd2BagCaption {
-  position:absolute;
-  margin-bottom: 55px;
+.galleryAttributesAdd1BagCaptionNone, .galleryAttributesAdd2BagCaptionNone {
+  display: none;
 }
 
 .groupContentImgBag1{
   display: flex;
   margin-left: 101px;
-  position: relative;
+  width: 50%;
 }
 
 .groupContentImgBag2{
-  display: flex;
-  margin-left: 700px;
-  margin-top: 24px;
-  margin-bottom: 24px;
-  position: relative;
+
 }
 
 .galleryAttributesBag{
@@ -304,12 +300,15 @@ margin: 8px 0 8px;
 
 .galleryAttributesBag, .galleryAttributesAdd1Bag, .galleryAttributesAdd2Bag, .galleryAttributesSwatchBag {
   display: flex;
-  align-items: center;
-  flex-direction: row;
-  margin: 45px -5px 0;
-  margin-bottom: 45px;
-
+  flex-wrap: wrap;
+  margin: 0 0 0 -2%
 }
+
+.galleryAttributesBagNone, .galleryAttributesAdd1BagNone, .galleryAttributesAdd2BagNone, .galleryAttributesSwatchBagNone {
+  display:none;
+  margin: -12% 0 0 0 !important;
+}
+
 
 .minusContentImgBag {
   cursor: pointer;
@@ -378,9 +377,6 @@ margin: 8px 0 8px;
   font-weight: 700;
 }
 
-
-
-
 #viewBag{
   font-family: 'Raleway', sans-serif;
   font-style: normal;
@@ -408,32 +404,6 @@ margin: 8px 0 8px;
 
 }
 
-#viewBag:hover {
-  font-family: 'Raleway', sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 120%;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  text-transform: uppercase;
-  flex-direction: column;
-  padding: 16px 32px;
-  left: 929px;
-  top: 478px;
-  cursor: pointer;
-  width: 140px;
-  height: 43px;
-  background-color: #5ECE7B;
-  color: white;
-  border: white;
-  margin-left: -12px;
-  margin-right: 12px;
-  text-decoration: none;
-  text-decoration-line: none;
-
-}
 
 .viewBagText{
   font-family: 'Raleway', sans-serif;
@@ -457,4 +427,8 @@ margin: 8px 0 8px;
   color: inherit;
   width: 1000px;
   margin: 45vh 45vh;
+}
+
+#cart-bag > ul{
+  margin: 0 0 0 -35px;
 }

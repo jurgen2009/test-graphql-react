@@ -12,7 +12,7 @@
 }
 
 .attributesItemType{
-  font-family: 'Roboto Condensed', sans-serif;;
+  font-family: 'Roboto Condensed', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -25,7 +25,7 @@
 }
 
 .attributesItemSwatchType{
-  font-family: 'Roboto Condensed', sans-serif;;
+  font-family: 'Roboto Condensed', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -63,6 +63,22 @@
   height:45px;
   }
 
+.attributesItemClicked, .attributesItemAdd1Clicked, .attributesItemAdd2Clicked{
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid #1D1F22;
+  box-sizing: border-box;
+  text-align: center;
+  top: 50%;
+  flex: 1 1 auto;
+  margin: 0 5px;
+  padding-top: 12px;
+  width:63px;
+  height:45px;
+  background-color: black;
+  color: white;
+}
+
 .attributesItem:hover, .attributesItemAdd1:hover, .attributesItemAdd2:hover {
   background-color: #000000;
   color: white;
@@ -86,11 +102,9 @@
 }
 
 #galleryList {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  flex-direction: column;
-  margin-top: 72px;
+  margin: 72px 0 0 93px;
+  height: 850px;
+  overflow: auto;
 }
 
 #galleryAddInfoButton {
@@ -122,18 +136,31 @@
 }
 
 .galleryAddInfoPrice{
-  font-family: 'Raleway', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: 46px;
+  left: 929px;
+  top: 412px;
+  color: #1D1F22;
+  margin: 20px 0;
+}
+
+.galleryAddInfoPriceNumbers {
+  font-family: "Raleway", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
   line-height: 18px;
-  height: 46px;
-  left: 929px;
-  top: 412px;
   display: flex;
   align-items: center;
+  margin: 0 0 20px 0;
   color: #1D1F22;
-  margin: 20px 0;
 }
 
 .galleryAddInfoDescription {
@@ -147,8 +174,8 @@
   line-height: 159.96%;
   color: #1D1F22;
   margin-top: 50px;
+  text-align: start;
 }
-
 
 .galleryListImg {
   cursor: pointer;
@@ -161,6 +188,7 @@
   flex-wrap: nowrap;
   align-items: flex-start;
   flex-direction: row;
+  margin: 0 58px 0 97px;
 }
 
 .galleryAttributesAdd1{

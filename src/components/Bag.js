@@ -8,11 +8,6 @@ class Bag extends React.Component {
             data: [],
             loading: true,
             category: null,
-            galleryIndex: 1,
-            attributesItemId: null,
-            attributesItemIdSwatch: null,
-            attributesItemIdAdd1: null,
-            attributesItemIdAdd2: null,
             itemsInCart: [],
             attributesFull: [],
             amountToPay: 0,
@@ -31,35 +26,6 @@ class Bag extends React.Component {
         itemsInOrder.push(itemInOrder)
         localStorage.setItem('itemsInOrder', JSON.stringify(itemsInOrder))
 
-    }
-
-    handlerGallery = (index) => {
-        this.props.updateGallery(this.state.galleryIndex = index)
-    }
-
-
-    handlerAttributesItem = (id) => {
-        if (this.props.attributesItemId !== id) {
-            this.props.updateAttributesItemId(this.state.attributesItemId = id)
-        }
-    }
-
-    handlerAttributesItemSwatch = (id) => {
-        if (this.props.attributesItemIdSwatch !== id) {
-            this.props.updateAttributesItemIdSwatch(this.state.attributesItemIdSwatch = id)
-        }
-    }
-
-    handlerAttributesItemAdd1 = (id) => {
-        if (this.props.attributesItemIdAdd1 !== id) {
-            this.props.updateAttributesItemIdAdd1(this.state.attributesItemIdAdd1 = id)
-        }
-    }
-
-    handlerAttributesItemAdd2 = (id) => {
-        if (this.props.attributesItemIdAdd2 !== id) {
-            this.props.updateAttributesItemIdAdd2(this.state.attributesItemIdAdd2 = id)
-        }
     }
 
     arrowRight = (index) => {
@@ -91,6 +57,12 @@ class Bag extends React.Component {
 
     render() {
 
+        let amountToPay = 0;
+        let y
+        amountToPay = this.props.itemsInCart.map(res=>y+=res.priceForOne*res.quantity, y=0).reverse()[0]!== undefined ?
+            this.props.itemsInCart.map(res=>y+=res.priceForOne*res.quantity, y=0).reverse()[0] : 0
+
+
         if (this.props.itemsInCart.length===0) {
             return (<div id="empty">{'SHOPPING CART IS EMPTY!'}</div>)
 
@@ -108,37 +80,32 @@ class Bag extends React.Component {
                             <div className="groupContentBag">
                                 <div className="groupContentImgBag1">
                                     <div className="shoppingCartItemList">
-                                        <span className="shoppingCartItemListNameBagText">{item.name}</span>
+                                        <div className="shoppingCartItemListNameBagText">{item.brand}</div>
+                                        <div className="shoppingCartItemListNameBagText">{item.name}</div>
                                         <span className="shoppingCartItemListPriceBagText">
-        {item.currency + item.price.toFixed(2)}</span>
+        {item.currency + item.priceForOne}</span>
                                         <div className="galleryAttributesBag">
                                             <div className="captionBag1">{item.attributesFull.map(
-                                                res => res.type === 'text' && res.id !== 'With USB 3 ports' && res.id !== 'Touch ID in keyboard' ? res.id : "")}</div>
-                                            {item.attributesFull.map((item1) => item1.type === 'text' && item1.id !== 'With USB 3 ports' && item1.id !== 'Touch ID in keyboard' ?
-                                                item1.items.map(item2 => {
-                                                    return this.props.itemsInCart.attributesId !== null ?
-                                                        (<div className="attributesItemBag"
-                                                              key={item2.id}
-                                                              style={item.attributesId === item2.id ?
-                                                                  {
-                                                                      backgroundColor: 'black',
-                                                                      color: 'white'
-                                                                  } : {}}>
-                                                            <span className="attributesItemBagText">{item2.value}</span>
+                                                res=>res.type==='text' && res.id !=='With USB 3 ports' && res.id !=='Touch ID in keyboard' ?
+                                                    res.id+":": "")}</div>
+                                            {item.attributesFull.map((item1)=>item1.type==='text' &&
+                                            item1.id !=='With USB 3 ports' && item1.id !=='Touch ID in keyboard' ?
+                                                item1.items.map(item2=>{
+                                                    return this.props.itemsInCart.attributesId!==null ?
+
+                                                        (<div key={item2.id} className={
+                                                            item.attributesId===item2.id ? "attributesItemBagBlack" : "attributesItemBag"}>
+                                                            <div className="attributesItemBagText">{item2.value}</div>
                                                         </div>) :
-                                                        (<div className="attributesItemBag"
-                                                              key={item2.id}>
-                                                            <span className="attributesItemBagText">{item2.value}</span>
-                                                        </div>)
-                                                }) : null)}
-                                            <br/>
+                                                        (<div className="attributesItemBag" key={item2.id}  >
+                                                            <div className="attributesItemBagText">{item2.value}</div>
+                                                        </div>)}) : null) }
                                         </div>
 
-                                        <div className="galleryAttributesSwatchBag"
-                                             style={item.attributesSwatch === null ?
-                                                 {display: 'none'} : {}}>
+                                        <div className={item.attributesFull.map((item1)=>item1.items.map(item2=>item2.id!=='Color' ?
+                                            "galleryAttributesSwatchBagNone" : "galleryAttributesSwatchBag"))}>
                                             <div
-                                                className="captionBag2">{item.attributesFull.map(res => res.type === 'swatch' ? res.id : "")}{":"}</div>
+                                                className="captionBag2">{item.attributesFull.map(res => res.type === 'swatch' ? res.id+":" : "")}{" "}</div>
                                             {item.attributesFull.map((item1, index) => (item1.type === 'swatch') ? item1.items.map(item2 => {
 
                                                     return this.props.itemsInCart.attributesSwatch !== null ?
@@ -155,60 +122,47 @@ class Bag extends React.Component {
                                                               style={{backgroundColor: item2.id}}>{""}</div>)
                                                 }) : null
                                             )}
-                                            <br/>
                                         </div>
 
                                         <div className="galleryAttributesAdd1Bag">
-                                            <div className="galleryAttributesAdd1BagCaption"
-                                                 style={item.attributesAdd1 === null ?
-                                                     {display: 'none'} : {}}>
-                                                <span
-                                                    className="captionBag3">{item.attributesFull.map((item1, index) => {
-                                                    if (index === 1) {
-                                                        return item1.id
-                                                    }
-                                                })}{":"}</span></div>
-                                            {item.attributesFull.map((item1, index) => (item1.id.includes("USB")) ? item1.items.map(item2 => {
-                                                return this.props.itemsInCart.map(res => res.attributesAdd1) !== null ?
-                                                    (<div className="attributesItemAdd1Bag" key={item2.id}
-                                                          style={item.attributesAdd1 === item2.id ?
-                                                              {
-                                                                  backgroundColor: 'black',
-                                                                  color: 'white'
-                                                              } : {}}>
-                                                        <span className="attributesItemBagText">{item2.id}</span>
-                                                    </div>) : (
-                                                        <div className="attributesItemAdd1Bag" key={item2.id}><span
-                                                            className="captionBag">{item2.id}</span></div>)
-                                            }) : null)}
-                                            <br/>
+                                            <div className={item.attributesFull.length<3 ?
+                                                "galleryAttributesAdd1BagCaptionNone" : "galleryAttributesAdd1BagCaption"}>
+
+                                                {item.attributesFull.map((item1, index)=>
+                                                {if (index === 1) {return item1.id+":"}
+                                                else
+                                                {return null
+
+
+                                                }})}
+                                            </div>
+                                            {item.attributesFull.map((item1, index)=>(item1.id.includes("USB"))  ? item1.items.map(item2=>{
+                                                return this.props.itemsInCart.map(res=>res.attributesAdd1) !==null ?
+                                                    (<div key={item2.id} className={item.attributesAdd1===item2.id ?
+                                                        "attributesItemAdd1BagBlack" : "attributesItemAdd1Bag"}>
+                                                        <div className="attributesItemBagText">{item2.id}
+                                                        </div>
+                                                    </div>) : (<div className="attributesItemAdd1Bag" key={item2.id}>
+                                                        <div className="attributesItemBagText">{item2.id}</div></div>)}) : null) }
                                         </div>
 
                                         <div className="galleryAttributesAdd2Bag">
-                                            <div className="galleryAttributesAdd2BagCaption"
-                                                 style={item.attributesAdd2 === null ?
-                                                     {display: 'none'} : {}}><span className="captionBag4">
-        {item.attributesFull.map((item1, index) => {
-            if (index === 2) {
-                return item1.id
-            }
-        })}{":"}</span></div>
-                                            {item.attributesFull.map((item1, index) =>
-                                                (item1.id.includes("USB")) ? item1.items.map(item2 => {
-                                                    return this.props.itemsInCart.map(res => res.attributesAdd2) !== null ?
-                                                        (<div className="attributesItemAdd2Bag"
-                                                              key={item2.id}
-                                                              style={item.attributesAdd2 === item2.id ?
-                                                                  {
-                                                                      backgroundColor: 'black',
-                                                                      color: 'white'
-                                                                  } : {}}>
-                                                            <span className="attributesItemBagText">{item2.id}</span>
-                                                        </div>) : (
-                                                            <div className="attributesItemAdd2SBag" key={item2.id}>
-                                                                <span className="captionBag">{item2.id}</span></div>)
-                                                }) : null)}
-                                            <br/>
+                                            <div className="galleryAttributesAdd2BagCaption" style={item.attributesAdd2===null ?
+                                                {display:'none'} : {}}>{item.attributesFull.map((item1, index)=>
+                                            {if (index === 2) {return item1.id+":"}
+                                            else
+                                            {return null
+
+
+                                            }})}</div>
+                                            {item.attributesFull.map((item1, index)=>(item1.id.includes("USB"))
+                                                ? item1.items.map(item2=>{
+                                                    return this.props.itemsInCart.map(res=>res.attributesAdd2) !==null ?
+                                                        (<div key={item2.id} className={item.attributesAdd2===item2.id ?
+                                                            "attributesItemAdd2BagBlack" : "attributesItemAdd2Bag"}>
+                                                            <div className="attributesItemBagText">{item2.id}</div>
+                                                        </div>) : (<div className="attributesItemAdd2Bag" key={item2.id}>
+                                                            <div className="attributesItemBagText">{item2.id}</div></div>)}) : null) }
                                         </div>
                                     </div>
                                 </div>
@@ -219,6 +173,7 @@ class Bag extends React.Component {
                                                 indexId: this.props.itemsInCart[index].indexId,
                                                 id: this.props.itemsInCart[index].id,
                                                 name: this.props.itemsInCart[index].name,
+                                                brand: this.props.itemsInCart[index].brand,
                                                 gallery: this.props.itemsInCart[index].gallery,
                                                 prices: this.props.itemsInCart[index].prices,
                                                 attributesFull: this.props.itemsInCart[index].attributesFull,
@@ -229,6 +184,7 @@ class Bag extends React.Component {
                                                 attributesAdd1: this.props.itemsInCart[index].attributesAdd1,
                                                 attributesAdd2: this.props.itemsInCart[index].attributesAdd2,
                                                 image: this.props.itemsInCart[index].image,
+                                                priceForOne: this.props.itemsInCart[index].price,
                                             })
                                         }}>
         <span className="plusSvg"><svg width="25" height="25" xmlns="http://www.w3.org/2000/svg">
@@ -245,6 +201,7 @@ class Bag extends React.Component {
                                                 { indexId: this.props.itemsInCart[index].indexId,
                                                     id: this.props.itemsInCart[index].id,
                                                     name: this.props.itemsInCart[index].name,
+                                                    brand: this.props.itemsInCart[index].brand,
                                                     gallery: this.props.itemsInCart[index].gallery,
                                                     prices: this.props.itemsInCart[index].prices,
                                                     attributesFull: this.props.itemsInCart[index].attributesFull,
@@ -255,6 +212,7 @@ class Bag extends React.Component {
                                                     attributesAdd1: this.props.itemsInCart[index].attributesAdd1,
                                                     attributesAdd2: this.props.itemsInCart[index].attributesAdd2,
                                                     image: this.props.itemsInCart[index].image,
+                                                    priceForOne: this.props.itemsInCart[index].price,
                                                 })
                                         }}>
         <span className="minusSvg">
@@ -272,6 +230,7 @@ class Bag extends React.Component {
                                             { indexId: this.props.itemsInCart[index].indexId,
                                                 id: this.props.itemsInCart[index].id,
                                                 name: this.props.itemsInCart[index].name,
+                                                brand: this.props.itemsInCart[index].brand,
                                                 gallery: this.props.itemsInCart[index].gallery,
                                                 prices: this.props.itemsInCart[index].prices,
                                                 attributesFull: this.props.itemsInCart[index].attributesFull,
@@ -282,6 +241,7 @@ class Bag extends React.Component {
                                                 attributesAdd1: this.props.itemsInCart[index].attributesAdd1,
                                                 attributesAdd2: this.props.itemsInCart[index].attributesAdd2,
                                                 image: this.props.itemsInCart[index].image,
+                                                priceForOne: this.props.itemsInCart[index].price,
                                             })
                                     }} className={item.gallery.length > 1 ? "bagArrowLeftImage" : "bagArrowImageNone"}>
                                         <svg className="bagArrow" width="8" height="14" viewBox="0 0 8 14"
@@ -296,6 +256,7 @@ class Bag extends React.Component {
                                             { indexId: this.props.itemsInCart[index].indexId,
                                                 id: this.props.itemsInCart[index].id,
                                                 name: this.props.itemsInCart[index].name,
+                                                brand: this.props.itemsInCart[index].brand,
                                                 gallery: this.props.itemsInCart[index].gallery,
                                                 prices: this.props.itemsInCart[index].prices,
                                                 attributesFull: this.props.itemsInCart[index].attributesFull,
@@ -306,6 +267,7 @@ class Bag extends React.Component {
                                                 attributesAdd1: this.props.itemsInCart[index].attributesAdd1,
                                                 attributesAdd2: this.props.itemsInCart[index].attributesAdd2,
                                                 image: this.props.itemsInCart[index].image,
+                                                priceForOne: this.props.itemsInCart[index].price,
                                             })
                                     }}
                                          className={item.gallery.length > 1 ? "bagArrowRightImage" : "bagArrowRightImageNone"}>
@@ -329,17 +291,18 @@ class Bag extends React.Component {
 
 
                 <div id="bagTotals">
-                    <div id="bagTax">{'Tax 21%: '}<span className="totalsBagFont">
+                    <div id="bagTax">{'Tax 21%: '}<div className="totalsBagFont">
         {this.props.itemsInCart[0].currency}
-                        {(this.amountToPay() * 21 / 100).toFixed(2)}</span></div>
+                        {(amountToPay * 21 / 100).toFixed(2)}</div>
+                    </div>
                     <div id="bagQuantity">{'Quantity: '}
-                    <span className="totalsBagFont">{this.quantityCounter()}</span>
+                    <div className="totalsBagFont">{this.quantityCounter()}</div>
                     </div>
                     <div id="bagTotalSum">
                         <span id="bagTotalName">{'Total: '}</span>
                         <span className="totalsBagFont">
         {this.props.itemsInCart[0].currency}
-                            {this.amountToPay().toFixed(2)}</span>
+                            {amountToPay.toFixed(2)}</span>
                     </div>
                     <button id="bagOrderButton"
                             onClick={() => {
